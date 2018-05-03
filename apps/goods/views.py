@@ -1,21 +1,18 @@
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 
-from goods.serializers import GoodsSerializer
+from goods import GoodsFilter
 from .models import Goods
-from rest_framework.generics import ListAPIView
 from goods.serializers import GoodsSerializer
+from rest_framework.mixins import ListModelMixin
+from rest_framework.viewsets import GenericViewSet
 
 
-class GoodsListView(ListAPIView):
+class GoodsListViewSet(ListModelMixin, GenericViewSet):
     ''''''
-
-    # APIView
-    # def get(self, request, format=None):
-    #     goods = Goods.objects.all()[:10]
-    #     goods_serializer = GoodsSerializer(goods, many=True)
-    #     return Response(goods_serializer.data)
 
     queryset = Goods.objects.all()[:10]
     serializer_class = GoodsSerializer
+
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('name', 'shop_price')
+    # filter_class = GoodsFilter
