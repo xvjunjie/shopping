@@ -20,12 +20,13 @@ from rest_framework.routers import DefaultRouter
 
 import xadmin
 from shopping.settings import MEDIA_ROOT
-from goods.views import GoodsListViewSet
+from goods.views import GoodsListViewSet, CategoryViewset
 from rest_framework.documentation import include_docs_urls
 
 router = DefaultRouter()
 # 配置goods的url  
 router.register(r'goods', GoodsListViewSet)
+router.register(r'categorys', CategoryViewset,base_name='categorys')
 
 urlpatterns = [
     url('xadmin/', xadmin.site.urls),
@@ -34,6 +35,7 @@ urlpatterns = [
     #     商品列表页 
     #     url(r'^goods/$', GoodsListView.as_view(), name='goods_list'),
     url(r'^', include(router.urls)),
+
     url(r'^docs/', include_docs_urls(title='title')),
     # 登陆的一个配置
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
