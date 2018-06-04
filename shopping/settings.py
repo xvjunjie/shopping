@@ -31,8 +31,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-
 AUTH_USER_MODEL = 'users.UserProfile'
 
 # Application definition
@@ -52,6 +50,7 @@ INSTALLED_APPS = [
     'xadmin',
     'rest_framework',
     'django_filters',
+    'rest_framework.authtoken',
 
 ]
 
@@ -150,4 +149,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 2,
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework.authentication.BasicAuthentication',
+    'rest_framework.authentication.SessionAuthentication',
+    ),
 }
