@@ -30,6 +30,9 @@ SECRET_KEY = 'nay+3bm=2$uujobq#0)itodec=7dj575&2-4_a_tuwe-a7h_4c'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+
 AUTH_USER_MODEL = 'users.UserProfile'
 
 # Application definition
