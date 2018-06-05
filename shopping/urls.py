@@ -18,6 +18,7 @@ from django.conf.urls import url, include
 from django.views.static import serve
 from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
+from rest_framework_jwt.views import obtain_jwt_token
 
 import xadmin
 from shopping.settings import MEDIA_ROOT
@@ -40,5 +41,6 @@ urlpatterns = [
     url(r'^docs/', include_docs_urls(title='title')),
     # 登陆的一个配置
     # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-    url(r'^api-token-auth/', views.obtain_auth_token)
+    # url(r'^api-token-auth/', views.obtain_auth_token),
+    url(r'^jwt_token_auth/', obtain_jwt_token),
 ]
