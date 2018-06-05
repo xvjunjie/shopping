@@ -23,12 +23,14 @@ from rest_framework_jwt.views import obtain_jwt_token
 import xadmin
 from shopping.settings import MEDIA_ROOT
 from goods.views import GoodsListViewSet, CategoryViewset
+from users.views import SmsCodeViewset
 from rest_framework.documentation import include_docs_urls
 
 router = DefaultRouter()
 # 配置goods的url  
 router.register(r'goods', GoodsListViewSet)
-router.register(r'categorys', CategoryViewset,base_name='categorys')
+router.register(r'categorys', CategoryViewset, base_name='categorys')
+router.register(r'codes', SmsCodeViewset, base_name='codes')
 
 urlpatterns = [
     url('xadmin/', xadmin.site.urls),
