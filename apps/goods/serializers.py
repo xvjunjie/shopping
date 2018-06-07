@@ -1,9 +1,7 @@
 # -*- coding:utf-8 -*-
 from rest_framework import serializers
 
-from goods.models import Goods, GoodsCategory
-
-
+from goods.models import Goods, GoodsCategory, GoodsImage
 
 
 # class GoodsSerializer(serializers.Serializer):
@@ -22,10 +20,10 @@ class CategorySerializer3(serializers.ModelSerializer):
 
 class CategorySerializer2(serializers.ModelSerializer):
     sub_cat = CategorySerializer3(many=True)
+
     class Meta:
         model = GoodsCategory
         fields = "__all__"
-
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -36,12 +34,18 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class GoodsImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GoodsImage
+        fields = ('image',)
+
+
 class GoodsSerializer(serializers.ModelSerializer):
     ''' Serializer'''
+
     category = CategorySerializer()
+    images = GoodsImageSerializer(many=True)
 
     class Meta:
         model = Goods
         fields = '__all__'
-
-

@@ -56,5 +56,14 @@ class SmsCodeViewset(CreateModelMixin, GenericViewSet):
 class UserViewset(CreateModelMixin,GenericViewSet):
     '''用户注册'''
     serializer_class = UserRegSerializer
-    queryset = User.object.all()
+    queryset = User.objects.all()
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        serializer.save()

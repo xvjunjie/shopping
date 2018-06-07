@@ -17,8 +17,8 @@ from rest_framework.viewsets import GenericViewSet
 
 
 
-class GoodsListViewSet(ListModelMixin, GenericViewSet):
-    '''商品列表'''
+class GoodsListViewSet(ListModelMixin, RetrieveModelMixin,GenericViewSet):
+    '''商品列表跟商品详情'''
 
     queryset = Goods.objects.all()[:10]
     serializer_class = GoodsSerializer
