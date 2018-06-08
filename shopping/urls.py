@@ -23,7 +23,8 @@ from rest_framework_jwt.views import obtain_jwt_token
 import xadmin
 from shopping.settings import MEDIA_ROOT
 from goods.views import GoodsListViewSet, CategoryViewset
-from user_operation.views import LeavingMessageViewset
+from trade.views import ShoppingCartViewset, OrderViewset
+from user_operation.views import LeavingMessageViewset, AddressViewset
 from users.views import SmsCodeViewset,UserViewset
 from rest_framework.documentation import include_docs_urls
 
@@ -34,6 +35,9 @@ router.register(r'categorys', CategoryViewset, base_name='categorys')
 router.register(r'codes', SmsCodeViewset, base_name='codes')
 router.register(r'users', UserViewset, base_name='users')
 router.register(r'message', LeavingMessageViewset, base_name='message')
+router.register(r'address', AddressViewset, base_name='address')
+router.register(r'shopcart', ShoppingCartViewset, base_name='shopcart')
+router.register(r'order', OrderViewset, base_name='order')
 
 urlpatterns = [
     url('xadmin/', xadmin.site.urls),
