@@ -6,7 +6,7 @@ from rest_framework_jwt.serializers import jwt_payload_handler
 from rest_framework_jwt.utils import jwt_encode_handler
 
 from .models import Goods,GoodsCategory
-from goods.serializers import GoodsSerializer,CategorySerializer
+from goods.serializers import GoodsSerializer, CategorySerializer, BannerSerializer
 from rest_framework.mixins import ListModelMixin,RetrieveModelMixin
 from rest_framework.viewsets import GenericViewSet
 
@@ -34,5 +34,5 @@ class CategoryViewset(ListModelMixin,RetrieveModelMixin,GenericViewSet):
 
     '''
     queryset = GoodsCategory.objects.all()
-    serializer_class = CategorySerializer
+    serializer_class = BannerSerializer
 
