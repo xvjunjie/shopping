@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from .models import VerifyCode
-from .serializers import SmsSerializer
+from .serializers import SmsSerializer,UserRegSerializer
 
 from utils.yunpian import YunPian
 from shopping.settings import APIKEY
@@ -53,6 +53,8 @@ class SmsCodeViewset(CreateModelMixin, GenericViewSet):
 
 
 
-
 class UserViewset(CreateModelMixin,GenericViewSet):
-    pass
+    '''用户注册'''
+    serializer_class = UserRegSerializer
+    queryset = User.object.all()
+
