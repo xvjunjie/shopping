@@ -51,3 +51,8 @@ class SmsCodeViewset(CreateModelMixin, GenericViewSet):
                 "mobile": mobile
             }, status=status.HTTP_201_CREATED)
 
+
+
+
+class UserViewset(CreateModelMixin,GenericViewSet):
+    pass

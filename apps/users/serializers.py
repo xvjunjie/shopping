@@ -3,7 +3,7 @@ import datetime
 import re
 from datetime import timedelta
 
-from rest_framework import serializers
+from rest_framework import serializers, fields
 from django.contrib.auth import get_user_model
 from shopping.settings import REGEX_MOBILE
 from .models import VerifyCode
@@ -34,3 +34,12 @@ class SmsSerializer(serializers.Serializer):
             raise serializers.ValidationError("距离上一次发送未超过60s")
 
         return mobile
+
+
+class UserRegSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(label='用户名', help_text='用户名', required=True, allow_blank=False,
+                                     validators=[])
+
+    class Mata:
+        model = User
+        fields = ()
