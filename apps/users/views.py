@@ -40,18 +40,18 @@ class SmsCodeViewset(CreateModelMixin, GenericViewSet):
         random_str = []
 
         for i in range(4):
-            random_str.append(choice(seeds))
+            random_str.append(choice(seeds))#＃ｃｈｏｉｃｅ　随机选一个
 
         return ''.join(random_str)
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):#来自源码
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         mobile = serializer.validated_data['mobile']
         yunpian = YunPian(APIKEY)
 
-        code = self.generate_code()
+        code = self.generate_code()#生成随机数
 
         sms_status = yunpian.send_sms(code=code, mobile=mobile)
 

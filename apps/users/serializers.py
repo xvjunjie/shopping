@@ -13,8 +13,9 @@ from .models import VerifyCode
 User = get_user_model()
 
 
-class SmsSerializer(serializers.Serializer):
+class  SmsSerializer(serializers.Serializer):
     mobile = serializers.CharField(max_length=11)
+
 
     def validated_moblie(self, mobile):
         '''
