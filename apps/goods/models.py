@@ -26,6 +26,13 @@ class GoodsCategory(models.Model):
     is_tab = models.BooleanField(default=False, verbose_name="是否导航", help_text="是否导航")
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
+    class Meta:
+        verbose_name = "商品类别"
+        verbose_name_plural = verbose_name
+        db_table = "goods_goodscategory"
+
+    def __str__(self):
+        return self.name
 
 class GoodsCategoryBrand(models.Model):
     """

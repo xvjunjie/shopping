@@ -29,7 +29,7 @@ SECRET_KEY = 'nay+3bm=2$uujobq#0)itodec=7dj575&2-4_a_tuwe-a7h_4c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = 'users.UserProfile'
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'users.apps.UsersConfig',
     'goods.apps.GoodsConfig',
     'trade.apps.TradeConfig',
@@ -51,7 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'rest_framework.authtoken',
-
+    'django.contrib.admin',
 
 ]
 
@@ -97,7 +98,7 @@ DATABASES = {
         'NAME': 'shop',
         'USER': 'root',
         'PASSWORD': 'mysql',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.116.128',
         'PORT': '3306',
         'OPTIONS': {'init_command': 'SET default_storage_engine=INNODB;'}
     }
@@ -147,20 +148,23 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 REST_FRAMEWORK = {
+    #设置分页
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 2,
+
+    #设置过滤
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+
+    #设置用户
     'DEFAULT_AUTHENTICATION_CLASSES': (
-    'rest_framework.authentication.BasicAuthentication',
-    'rest_framework.authentication.SessionAuthentication',
-    'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
 }
 
-
-#手机号码正则表达式
+# 手机号码正则表达式
 REGEX_MOBILE = "^1[358]\d{9}$|^147\d{8}$|^176\d{8}$"
 
-
-#云片网设置
+# 云片网设置
 APIKEY = ""

@@ -13,27 +13,34 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# from django.contrib import admin
 from django.conf.urls import url, include
 from django.views.static import serve
-from rest_framework.authtoken import views
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 
 import xadmin
 from shopping.settings import MEDIA_ROOT
-from goods.views import GoodsListViewSet, CategoryViewset
+from goods.views import GoodsListViewSet, CategoryViewset, BannerViewset
 from user_operation.views import UserFavViewset
+from trade.views import ShoppingCartViewset, OrderViewset
+from user_operation.views import LeavingMessageViewset, AddressViewset
 from users.views import SmsCodeViewset,UserViewset
 from rest_framework.documentation import include_docs_urls
 
 router = DefaultRouter()
-# 配置goods的url  
+
+# 配置url  
 router.register(r'goods', GoodsListViewSet)
 router.register(r'categorys', CategoryViewset, base_name='categorys')
 router.register(r'codes', SmsCodeViewset, base_name='codes')
 router.register(r'users', UserViewset, base_name='users')
 router.register(r'userfav', UserFavViewset, base_name='userfav')
+router.register(r'message', LeavingMessageViewset, base_name='message')
+router.register(r'address', AddressViewset, base_name='address')
+router.register(r'shopcart', ShoppingCartViewset, base_name='shopcart')
+router.register(r'order', OrderViewset, base_name='order')
+router.register(r'banner', BannerViewset, base_name='banner')
+
 
 urlpatterns = [
     url('xadmin/', xadmin.site.urls),
@@ -45,7 +52,7 @@ urlpatterns = [
 
     url(r'^docs/', include_docs_urls(title='title')),
     # 登陆的一个配置
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^jwt_token_auth/', obtain_jwt_token),
 ]

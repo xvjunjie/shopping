@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from rest_framework import serializers
 
+from goods.models import Goods, GoodsCategory, Banner
 from goods.models import Goods, GoodsCategory, GoodsImage
 
 
@@ -49,3 +50,9 @@ class GoodsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goods
         fields = '__all__'
+
+
+class BannerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Banner
+        fields = "__all__"
