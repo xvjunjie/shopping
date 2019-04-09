@@ -1,3 +1,5 @@
+from django.contrib.auth.backends import ModelBackend
+from django.db.models import Q
 from random import choice
 
 from django.contrib.auth import get_user_model
@@ -16,6 +18,19 @@ from shopping.settings import APIKEY
 
 
 User = get_user_model()
+
+class CustomBackend(ModelBackend):
+    '''
+    自定义用户认证
+    '''
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        try:
+            user = User.objects.get(Q (username=username) | Q(mobile=username))
+            if user.check_password(password):
+                return user
+        except Exception as e:
+            return None
+
 
 class SmsCodeViewset(CreateModelMixin, GenericViewSet):
     serializer_class = SmsSerializer
