@@ -5,13 +5,6 @@ from goods.models import Goods, GoodsCategory, Banner
 from goods.models import Goods, GoodsCategory, GoodsImage
 
 
-# class GoodsSerializer(serializers.Serializer):
-#     name = serializers.CharField(required=True, max_length=100)
-#     click_num = serializers.IntegerField(default=0)
-#
-#     def create(self, validated_data):
-#         pass
-
 
 class CategorySerializer3(serializers.ModelSerializer):
     class Meta:

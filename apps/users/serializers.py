@@ -50,7 +50,7 @@ class UserRegSerializer(serializers.ModelSerializer):
                                      "required": "请输入验证码",
                                      "max_length": "验证码格式错误",
                                      "min_length": "验证码格式错误"
-                                 })
+                                 })#code在model中没有，验证完删除，不会入库
 
     username = serializers.CharField(label='用户名', help_text='用户名', required=True, allow_blank=False,
                                      validators=[UniqueValidator(queryset=User.objects.all(), message="用户已经存在")])
@@ -63,7 +63,7 @@ class UserRegSerializer(serializers.ModelSerializer):
         one_mintes_ago = datetime.now() - timedelta(hours=0, minutes=1, seconds=0)
 
         verify_records = VerifyCode.objects.filter(mobile=self.initial_data["username"]).order_by(
-            "-add_time")  # initial 前端传过来的值
+            "-add_time")  # initial_data 前端传过来的值
 
         if verify_records:
             last_record = verify_records[0]
@@ -76,8 +76,8 @@ class UserRegSerializer(serializers.ModelSerializer):
 
             raise serializers.ValidationError("验证码错误")
 
-    def validate(self, attrs):
-        attrs["mobile"] = attrs["username"]
+    def validate(self, attrs):#作用与所有的字段
+        attrs["mobile"] = attrs["username"]#把用户名赋值给手机
         del attrs["code"]
         return attrs
 
